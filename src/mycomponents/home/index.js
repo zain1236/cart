@@ -13,6 +13,7 @@ export default function Home() {
 
       const { products, setProducts } = useContext(ProductContext);
       const [showing,setShowing] = useState();
+      const [fetched,setFetched] = useState(false);
 
       const fetchAllData = async () => {
         const response = await axios.get("https://dummyjson.com/products");
@@ -24,8 +25,12 @@ export default function Home() {
       
       // eslint-disable-next-line
       useEffect(() => {
-          fetchAllData();
-        }, []);
+          if (fetched === false) {
+            fetchAllData();
+            setFetched(true);
+          }
+          
+        });
   
 
       return (
