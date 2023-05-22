@@ -11,12 +11,13 @@ export default function ProductDetails(props) {
     const { cart, addProductToCart } = useContext(ProductContext);
 
 
-    function getProductById(products, id) {
-        return products.find(product => product.id === parseInt(id));
+    async function getProductById(products, id) {
+        return products.find(product => product._id === parseInt(id));
     }
     
-
     var p = getProductById(props.products,id);
+    // console.log("prod",p);
+
    
 
     function Addcart(){

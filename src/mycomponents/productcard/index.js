@@ -40,7 +40,7 @@ export default function Product(props) {
         <CardActions style={{ position: 'absolute', bottom: '0' }}>
 
 
-        <Link to={`/product/${props.id}`} >
+        <Link to={`/product/${props._id}`} >
             <Button size="small" color="primary" startIcon={ <AddShoppingCartIcon /> } >
               Add to cart 
             </Button>
