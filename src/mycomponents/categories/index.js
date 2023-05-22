@@ -14,8 +14,14 @@ const CategorySlider = (props) => {
 
     useEffect(() => {
         const fetchData = async () => {
-          const response = await axios.get("https://dummyjson.com/products/categories");
-          setCategories(response.data);
+          let config = {
+            headers: {
+              'Authorization': 'Bearer ' + process.env.REACT_APP_TOKEN
+            }
+          }
+          const url = process.env.REACT_APP_URL + "/products/categories";
+          const response = await axios.get(url,config);
+          setCategories(response.data.data);
         };
         fetchData();
       }, []);
@@ -23,10 +29,16 @@ const CategorySlider = (props) => {
      const handleCategory = async (category) => {
 
       navigate("/");
-      const response = await axios.get("https://dummyjson.com/products/category/"+category);
+      let config = {
+        headers: {
+          'Authorization': 'Bearer ' + process.env.REACT_APP_TOKEN
+        }
+      }
+      const url = process.env.REACT_APP_URL + "/products/category?products=" + category;
+      const response = await axios.get(url,config);
 
       props.setShowing(category);
-      setProducts(response.data.products);
+      setProducts(response.data.data);
       setActiveCategory(category);
     }
     
