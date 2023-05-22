@@ -16,9 +16,16 @@ export default function Home() {
       const [fetched,setFetched] = useState(false);
 
       const fetchAllData = async () => {
-        const response = await axios.get("https://dummyjson.com/products");
-        console.log(response.data);
-        setProducts(response.data.products);
+        let config = {
+          headers: {
+            'Authorization': 'Bearer ' + process.env.REACT_APP_TOKEN
+          }
+        }
+        const url = process.env.REACT_APP_URL + "/products";
+  
+        const response = await axios.get(url,config);
+        // console.log(response.data);
+        setProducts(response.data.data);
         setShowing("All");
       };
 

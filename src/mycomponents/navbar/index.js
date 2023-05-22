@@ -15,9 +15,16 @@ export const Navbar = (props) => {
 
   const searchProduct = async () => {
 
-    const response = await axios.get("https://dummyjson.com/products/search?q="+search);
+    let config = {
+      headers: {
+        'Authorization': 'Bearer ' + process.env.REACT_APP_TOKEN
+      }
+    }
+    const url = process.env.REACT_APP_URL + "/products/search?q=" +search;
+
+    const response = await axios.get(url,config);
     props.setShowing(search);
-    setProducts(response.data.products);
+    setProducts(response.data.data);
   }
 
 
